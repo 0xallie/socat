@@ -411,22 +411,14 @@ int xio_socks5_username_password(int level, struct opt *opts,
    /*!!! */
    unsigned char sendbuff[513];
    unsigned char *pos;
-   char *username = NULL;
-   char *password = NULL;
+   char *username = "";
+   char *password = "";
    unsigned char recvbuff[2];
    struct socks5_userpass_reply *reply;
    int result;
 
    retropt_string(opts, OPT_SOCKS5_USERNAME, (char **)&username);
-   if (username == NULL) {
-      Error("socks5: username required");
-      return STAT_NORETRY;
-   }
    retropt_string(opts, OPT_SOCKS5_PASSWORD, (char **)&password);
-   if (password == NULL) {
-      Error("socks5: password required");
-      return STAT_NORETRY;
-   }
 
    pos = sendbuff;
    *pos++ = SOCKS5_USERPASS_VERSION;
