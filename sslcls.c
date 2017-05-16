@@ -55,6 +55,7 @@ const SSL_METHOD *sycSSLv2_server_method(void) {
 }
 #endif
 
+#if HAVE_SSLv3_client_method
 const SSL_METHOD *sycSSLv3_client_method(void) {
    const SSL_METHOD *result;
    Debug("SSLv3_client_method()");
@@ -62,7 +63,9 @@ const SSL_METHOD *sycSSLv3_client_method(void) {
    Debug1("SSLv3_client_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_SSLv3_server_method
 const SSL_METHOD *sycSSLv3_server_method(void) {
    const SSL_METHOD *result;
    Debug("SSLv3_server_method()");
@@ -70,7 +73,9 @@ const SSL_METHOD *sycSSLv3_server_method(void) {
    Debug1("SSLv3_server_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_SSLv23_client_method
 const SSL_METHOD *sycSSLv23_client_method(void) {
    const SSL_METHOD *result;
    Debug("SSLv23_client_method()");
@@ -78,7 +83,9 @@ const SSL_METHOD *sycSSLv23_client_method(void) {
    Debug1("SSLv23_client_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_SSLv23_server_method
 const SSL_METHOD *sycSSLv23_server_method(void) {
    const SSL_METHOD *result;
    Debug("SSLv23_server_method()");
@@ -86,7 +93,9 @@ const SSL_METHOD *sycSSLv23_server_method(void) {
    Debug1("SSLv23_server_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_TLSv1_client_method
 const SSL_METHOD *sycTLSv1_client_method(void) {
    const SSL_METHOD *result;
    Debug("TLSv1_client_method()");
@@ -94,7 +103,9 @@ const SSL_METHOD *sycTLSv1_client_method(void) {
    Debug1("TLSv1_client_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_TLSv1_server_method
 const SSL_METHOD *sycTLSv1_server_method(void) {
    const SSL_METHOD *result;
    Debug("TLSv1_server_method()");
@@ -102,7 +113,8 @@ const SSL_METHOD *sycTLSv1_server_method(void) {
    Debug1("TLSv1_server_method() -> %p", result);
    return result;
 }
- 
+#endif
+
 #if HAVE_TLSv1_1_client_method
 const SSL_METHOD *sycTLSv1_1_client_method(void) {
    const SSL_METHOD *result;
@@ -143,6 +155,7 @@ const SSL_METHOD *sycTLSv1_2_server_method(void) {
 }
 #endif
 
+#if HAVE_DTLSv1_client_method
 const SSL_METHOD *sycDTLSv1_client_method(void) {
    const SSL_METHOD *result;
    Debug("DTLSv1_client_method()");
@@ -150,7 +163,9 @@ const SSL_METHOD *sycDTLSv1_client_method(void) {
    Debug1("DTLSv1_client_method() -> %p", result);
    return result;
 }
+#endif
 
+#if HAVE_DTLSv1_server_method
 const SSL_METHOD *sycDTLSv1_server_method(void) {
    const SSL_METHOD *result;
    Debug("DTLSv1_server_method()");
@@ -158,6 +173,7 @@ const SSL_METHOD *sycDTLSv1_server_method(void) {
    Debug1("DTLSv1_server_method() -> %p", result);
    return result;
 }
+#endif
 
 SSL_CTX *sycSSL_CTX_new(const SSL_METHOD *method) {
    SSL_CTX *result;
@@ -278,7 +294,7 @@ int sycSSL_connect(SSL *ssl) {
    Debug1("SSL_connect(%p)", ssl);
    result = SSL_connect(ssl);
    Debug1("SSL_connect() -> %d", result);
-   return result;   
+   return result;
 }
 
 int sycSSL_accept(SSL *ssl) {
@@ -286,7 +302,7 @@ int sycSSL_accept(SSL *ssl) {
    Debug1("SSL_accept(%p)", ssl);
    result = SSL_accept(ssl);
    Debug1("SSL_accept() -> %d", result);
-   return result;   
+   return result;
 }
 
 int sycSSL_read(SSL *ssl, void *buf, int num) {
@@ -322,7 +338,7 @@ X509 *sycSSL_get_peer_certificate(SSL *ssl) {
    } else {
       Debug("SSL_get_peer_certificate() -> NULL");
    }
-   return result;   
+   return result;
 }
 
 int sycSSL_shutdown(SSL *ssl) {
